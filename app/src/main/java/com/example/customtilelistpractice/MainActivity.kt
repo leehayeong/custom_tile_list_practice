@@ -2,6 +2,9 @@ package com.example.customtilelistpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
 import com.example.customtilelistpractice.databinding.ActivityMainBinding
 import com.example.customtilelistpractice.model.TileEntity
 
@@ -20,7 +23,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRecyclerView() {
         binding.tileList.apply {
-            adapter = tileAdapter
+            adapter = tileAdapter.apply {
+                longClickEvent = {
+                    Log.d("click", it.id + " " + it.name)
+                }
+            }
         }
     }
 

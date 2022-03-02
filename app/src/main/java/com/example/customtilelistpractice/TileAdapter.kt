@@ -17,6 +17,8 @@ import com.example.customtilelistpractice.model.TileEntity
 
 class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback()) {
 
+    var longClickEvent: ((TileEntity) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemTileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -40,6 +42,19 @@ class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback
     }
 
     inner class ViewHolder(private val binding: ItemTileBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            /**
+             * setOnLongClickListener 반환값
+             * false: default. 다음 이벤트 진행함. longClick 후 click 이벤트 실행됨.
+             * true: 이벤트 종료됨. longClick 후 click 이벤트가 실행되지 않음. longClick 이벤트만 활성화하고 싶을 때 사용.
+             */
+            binding.root.setOnLongClickListener {
+                longClickEvent?.invoke(binding.tile ?: return@setOnLongClickListener true)
+                return@setOnLongClickListener true
+            }
+        }
+
         fun bind(item: TileEntity) {
             binding.tile = item
         }
