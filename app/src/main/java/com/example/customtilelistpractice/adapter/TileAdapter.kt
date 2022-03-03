@@ -2,7 +2,6 @@ package com.example.customtilelistpractice.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.Animation
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +19,7 @@ import java.util.*
 class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback()),
     ItemTouchHelperCallback.OnItemMoveListener {
 
-    var startEditModeEvent: (() -> Unit)? = null    // 타일 아이템을 길게 클릭했을 때 이벤으
-    var shakingAnimation: Animation? = null         // 흔들리는 애니메이션
+    var startEditModeEvent: (() -> Unit)? = null    // 타일 아이템을 길게 클릭했을 때 이벤트
     override var isEditMode: Boolean = false        // 현재 편집 모드인지 (= 아이템이 움직일 수 있는지)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -100,8 +98,12 @@ class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback
             binding.tile = item
 
             // 편집모드일때만 흔들리는 애니메이션 시작
-            if (isEditMode) binding.root.startAnimation(shakingAnimation)
-            else binding.root.clearAnimation()
+            if (isEditMode) {
+                binding.root.animation = item.shakingAnimation
+                binding.root.animation.start()
+            } else {
+                binding.root.clearAnimation()
+            }
         }
     }
 }

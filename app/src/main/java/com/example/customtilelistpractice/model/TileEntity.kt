@@ -1,5 +1,9 @@
 package com.example.customtilelistpractice.model
 
+import android.view.animation.RotateAnimation
+import com.example.customtilelistpractice.bigShakingAnimation
+import com.example.customtilelistpractice.smallShakingAnimation
+
 /**
  *  TileEntity.kt
  *
@@ -11,4 +15,6 @@ data class TileEntity(
     val id: String,
     val name: String,
     val span: Int,
-)
+) {
+    val shakingAnimation: RotateAnimation = if (span == 1) bigShakingAnimation else smallShakingAnimation
+}
