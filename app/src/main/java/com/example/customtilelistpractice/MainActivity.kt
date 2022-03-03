@@ -2,9 +2,8 @@ package com.example.customtilelistpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.view.animation.AnimationUtils
 import com.example.customtilelistpractice.databinding.ActivityMainBinding
 import com.example.customtilelistpractice.model.TileEntity
 
@@ -25,8 +24,15 @@ class MainActivity : AppCompatActivity() {
         binding.tileList.apply {
             adapter = tileAdapter.apply {
                 longClickEvent = {
-                    Log.d("click", it.id + " " + it.name)
+                    binding.okButton.apply {
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            tileAdapter.clearAnimation()
+                            binding.okButton.visibility = View.GONE
+                        }
+                    }
                 }
+                shakingAnimation = AnimationUtils.loadAnimation(context, R.anim.shaking)
             }
         }
     }

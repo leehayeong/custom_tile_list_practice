@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="100"
+    android:fromDegrees="-5"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:repeatCount="infinite"
+    android:repeatMode="reverse"
+    android:toDegrees="5" />
+
+    <!--
+    duration: 효과 시간
+    fromDegrees: 회전 시작 각도
+    pivotX: 회전 중심 X 좌표
+    pivotY: 회전 중심 Y 좌표
+    repeatCount: 반복 횟수
+    repeatMode: 반복 횟수가 0보다 클 때 효과가 끝나는 시점의 동작 지점 (restart / reverse)
+    toDegrees: 회전 끝 각도
+    -->

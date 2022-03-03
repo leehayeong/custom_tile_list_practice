@@ -1,7 +1,9 @@
 package com.example.customtilelistpractice
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.Animation
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +19,9 @@ import com.example.customtilelistpractice.model.TileEntity
 
 class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback()) {
 
-    var longClickEvent: ((TileEntity) -> Unit)? = null
+    var longClickEvent: (() -> Unit)? = null
+    var shakingAnimation: Animation? = null
+    var isShaking: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -41,6 +45,16 @@ class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback
             oldItem == newItem
     }
 
+    private fun startAnimation() {
+        isShaking = true
+        notifyDataSetChanged()
+    }
+
+    fun clearAnimation() {
+        isShaking = false
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(private val binding: ItemTileBinding) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -50,13 +64,20 @@ class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback
              * true: 이벤트 종료됨. longClick 후 click 이벤트가 실행되지 않음. longClick 이벤트만 활성화하고 싶을 때 사용.
              */
             binding.root.setOnLongClickListener {
-                longClickEvent?.invoke(binding.tile ?: return@setOnLongClickListener true)
+                longClickEvent?.invoke()
+                startAnimation()
                 return@setOnLongClickListener true
             }
         }
 
         fun bind(item: TileEntity) {
             binding.tile = item
+
+            if (isShaking) {
+                binding.root.startAnimation(shakingAnimation)
+            } else {
+                binding.root.clearAnimation()
+            }
         }
     }
 }
