@@ -92,14 +92,22 @@ class TileAdapter : ListAdapter<TileEntity, TileAdapter.ViewHolder>(DiffCallback
                 if (!isEditMode) startEditMode()
                 return@setOnLongClickListener true
             }
+
+            // TODO: 뷰타입을 나눠서 TileEntity 에서 셋팅하고 있던 애니메션과 높이를 여기서 지정해보자..
         }
 
         fun bind(item: TileEntity) {
             binding.tile = item
 
+            // TODO 얘는 고정값인데 매번 바인드될때마다 해야할까? 더 좋은 위치가 있나?
+            binding.root.apply {
+                layoutParams.height = item.heightDp
+                animation = item.shakingAnimation
+            }
+            binding.root.requestLayout()
+
             // 편집모드일때만 흔들리는 애니메이션 시작
             if (isEditMode) {
-                binding.root.animation = item.shakingAnimation
                 binding.root.animation.start()
             } else {
                 binding.root.clearAnimation()

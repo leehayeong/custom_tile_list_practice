@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding.tileList.layoutManager = GridLayoutManager(this, 3).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
-                    return tileAdapter.currentList[position].span
+                    return tileAdapter.currentList[position].widthSpan
                 }
             }
         }
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         // 1. OnItemMoveListener 를 구현한 adapter 로 touchItemHelper Callback 을 생성하고
         // 2. ItemTouchHelper 를 만들어서
-        // 2. recyclerView 에 attach
+        // 3. recyclerView 에 attach
         val callback: ItemTouchHelper.Callback = ItemTouchHelperCallback(tileAdapter)
         val touchHelper = ItemTouchHelper(callback)
         touchHelper.attachToRecyclerView(binding.tileList)
@@ -60,22 +60,22 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val TEST_TILE_LIST = listOf(
-            TileEntity("1", "A", 1),
-            TileEntity("2", "B", 2),
-            TileEntity("3", "C", 1),
-            TileEntity("5", "D", 3),
-            TileEntity("6", "E", 1),
-            TileEntity("7", "F", 2),
-            TileEntity("8", "G", 1),
-            TileEntity("9", "h", 3),
-            TileEntity("1", "A", 1),
-            TileEntity("2", "B", 2),
-            TileEntity("3", "C", 1),
-            TileEntity("5", "D", 3),
-            TileEntity("6", "E", 1),
-            TileEntity("7", "F", 2),
-            TileEntity("8", "G", 1),
-            TileEntity("9", "h", 3),
+            TileEntity("1", "A", 1, 1),
+            TileEntity("2", "B", 2, 1),
+            TileEntity("3", "C", 1, 1),
+            TileEntity("5", "D", 3, 1),
+            TileEntity("6", "E", 1, 1),
+            TileEntity("7", "F", 2, 1),
+            TileEntity("8", "G", 1, 1),
+            TileEntity("9", "h", 3, 2),
+            TileEntity("1", "A", 1, 1),
+            TileEntity("2", "B", 2, 1),
+            TileEntity("3", "C", 1, 1),
+            TileEntity("5", "D", 3, 2),
+            TileEntity("6", "E", 1, 1),
+            TileEntity("7", "F", 2, 1),
+            TileEntity("8", "G", 1, 1),
+            TileEntity("9", "h", 3, 2),
         )
     }
 }
