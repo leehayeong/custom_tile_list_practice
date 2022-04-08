@@ -1,4 +1,4 @@
-package com.example.customtilelistpractice.extensions
+package com.example.customtilelistpractice.common
 
 import android.content.res.Resources
 

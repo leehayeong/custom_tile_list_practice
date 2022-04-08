@@ -1,4 +1,4 @@
-package com.example.customtilelistpractice
+package com.example.customtilelistpractice.common
 
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
