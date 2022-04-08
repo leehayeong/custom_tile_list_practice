@@ -1,4 +1,4 @@
-package com.example.customtilelistpractice.adapter
+package com.example.customtilelistpractice.tile.ui
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

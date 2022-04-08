@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customtilelistpractice.databinding.ActivityMainRvTileBinding
-import com.example.customtilelistpractice.databinding.ActivityMainTitleBinding
-import com.example.customtilelistpractice.model.TileEntity
+import com.example.customtilelistpractice.databinding.ActivityMainRvTileListBinding
+import com.example.customtilelistpractice.databinding.ActivityMainRvTitleBinding
+import com.example.customtilelistpractice.tile.model.RectangleTile
+import com.example.customtilelistpractice.tile.model.SquareTile
+import com.example.customtilelistpractice.tile.ui.ItemTouchHelperCallback
+import com.example.customtilelistpractice.tile.ui.TileAdapter
 
 /**
  *  MainAdapter.kt
@@ -27,9 +30,9 @@ class MainAdapter : RecyclerView.Adapter<MainCommonViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
 
         return if (viewType == TYPE_TITLE)
-            TitleViewHolder(ActivityMainTitleBinding.inflate(inflater, parent, false))
+            TitleViewHolder(ActivityMainRvTitleBinding.inflate(inflater, parent, false))
         else
-            TileViewHolder(ActivityMainRvTileBinding.inflate(inflater, parent, false))
+            TileListViewHolder(ActivityMainRvTileListBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: MainCommonViewHolder, position: Int) {
@@ -49,34 +52,19 @@ class MainAdapter : RecyclerView.Adapter<MainCommonViewHolder>() {
         const val TYPE_TILE = 1
 
         private val TEST_TILE_LIST = listOf(
-            TileEntity("1", "A", 1, 1),
-            TileEntity("2", "B", 2, 1),
-            TileEntity("3", "C", 1, 1),
-            TileEntity("5", "D", 3, 1),
-            TileEntity("6", "E", 1, 1),
-            TileEntity("7", "F", 2, 1),
-            TileEntity("8", "G", 1, 1),
-            TileEntity("9", "h", 3, 2),
-            TileEntity("1", "A", 1, 1),
-            TileEntity("2", "B", 2, 1),
-            TileEntity("3", "C", 1, 1),
-            TileEntity("5", "D", 3, 2),
-            TileEntity("6", "E", 1, 1),
-            TileEntity("7", "F", 2, 1),
-            TileEntity("8", "G", 1, 1),
-            TileEntity("9", "h", 3, 2),
+            SquareTile("메뉴1"),
+            SquareTile("메뉴2"),
+            SquareTile("메뉴3"),
+            SquareTile("메뉴4"),
+            SquareTile("메뉴5"),
+            SquareTile("메뉴6"),
+            RectangleTile("금융뉴스"),
+            RectangleTile("이번달 소비"),
+            RectangleTile("소비습관 추천"),
         )
     }
 
-
-
-
-
-
-
-
-
-    inner class TitleViewHolder(private val binding: ActivityMainTitleBinding) :
+    inner class TitleViewHolder(private val binding: ActivityMainRvTitleBinding) :
         MainCommonViewHolder(binding.root) {
         init {
             binding.okButton.setOnClickListener {
@@ -89,7 +77,7 @@ class MainAdapter : RecyclerView.Adapter<MainCommonViewHolder>() {
         override fun bind() {}
     }
 
-    inner class TileViewHolder(private val binding: ActivityMainRvTileBinding) :
+    inner class TileListViewHolder(private val binding: ActivityMainRvTileListBinding) :
         MainCommonViewHolder(binding.root) {
 
         init {

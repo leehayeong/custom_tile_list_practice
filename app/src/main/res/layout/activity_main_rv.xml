@@ -10,5 +10,7 @@
         android:id="@+id/mainRvContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:background="#F6FAFF"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 </layout>
